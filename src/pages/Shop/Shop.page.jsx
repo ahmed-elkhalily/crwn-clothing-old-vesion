@@ -2,8 +2,7 @@ import CollectionOverview from "../../Components/collection-overview/collection.
 import { Switch, Route } from "react-router-dom"
 import collectionPage from "../collection/collection.page"
 import { Component } from "react"
-import { firestore } from "../../firebase/firebase.utils"
-import { shopCollectionsAction } from "../../redux/shop/shop.action.js"
+import { shopCollectionFetching } from "../../redux/shop/shop.action.js"
 import { connect } from "react-redux"
 import SpinnerComponent from "../../Components/spinner/spinner.component"
 
@@ -11,33 +10,14 @@ const CollectionOverviewWithSpinner = SpinnerComponent(CollectionOverview)
 const CollectionPageWithSpinner = SpinnerComponent(collectionPage)
 
 class Shop extends Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			isLoadingData: true,
-		}
-	}
-
 	componentDidMount() {
-		firestore.collection("collections").onSnapshot(
-			(snapShot) => {
-				let shopCollections = {}
-
-				snapShot.docs.map((doc) => {
-					shopCollections[doc.data().title.toLowerCase()] = doc.data()
-					return null
-				})
-
-				this.props.addShopCollectionsToRed(shopCollections)
-				this.setState({ isLoadingData: false })
-			},
-			(err) => console.log("error: ", err)
-		)
+		const { collectionFetchAction } = this.props
+		collectionFetchAction()
 	}
 
 	render() {
-		const { match } = this.props
+		console.log(this.props.isFetching)
+		const { match, isFetching } = this.props
 		return (
 			<div className="shop-page">
 				<div className="container">
@@ -46,20 +26,14 @@ class Shop extends Component {
 							exact
 							path={`${match.path}`}
 							render={() =>
-								CollectionOverviewWithSpinner(
-									this.state.isLoadingData,
-									match
-								)
+								CollectionOverviewWithSpinner(isFetching, match)
 							}
 						/>
 						<Route
 							exact
 							path={`${match.path}/:collectionId`}
 							render={({ match }) =>
-								CollectionPageWithSpinner(
-									this.state.isLoadingData,
-									match
-								)
+								CollectionPageWithSpinner(isFetching, match)
 							}
 						/>
 					</Switch>
@@ -68,9 +42,13 @@ class Shop extends Component {
 		)
 	}
 }
+
 const mapDispatchToProps = (dispatch) => ({
-	addShopCollectionsToRed: (shopCollections) =>
-		dispatch(shopCollectionsAction(shopCollections)),
+	collectionFetchAction: () => dispatch(shopCollectionFetching),
 })
 
-export default connect(null, mapDispatchToProps)(Shop)
+const mapStateToProps = (state) => ({
+	isFetching: state.shopCollections.isFetching,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shop)

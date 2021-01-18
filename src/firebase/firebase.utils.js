@@ -68,6 +68,17 @@ export const signinWithEmailAndPassword = (email, password) => {
 		})
 }
 
+// collect collections docs
+export const snapShotMapToReduce = (snapShot) => {
+	let shopCollections = {}
+
+	snapShot.docs.map((doc) => {
+		shopCollections[doc.data().title.toLowerCase()] = doc.data()
+		return null
+	})
+	return shopCollections
+}
+
 const provider = new firebase.auth.GoogleAuthProvider()
 
 export const signinWithGoogle = () => auth.signInWithPopup(provider)
