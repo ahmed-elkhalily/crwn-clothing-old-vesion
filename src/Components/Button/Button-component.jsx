@@ -1,17 +1,17 @@
-import { CustomBtn } from "./Button.style"
+import { CustomBtnGlobal } from "./Button.style"
 const Button = ({ children, onClickEvent, googleSignin, inverted, style }) => {
-    return (
-        <CustomBtn
-            className={`${googleSignin ? "google-sign-in" : ""} ${
-                inverted ? "inverted" : ""
-            }`}
-            onClick={() => {
-                onClickEvent()
-            }}
-            style={style}
-        >
-            {children}
-        </CustomBtn>
-    )
+	return (
+		<CustomBtnGlobal
+			className={`${googleSignin ? "google-sign-in" : ""} ${
+				inverted ? "inverted" : ""
+			}`}
+			onClick={() => {
+				onClickEvent()
+			}}
+			style={style}
+		>
+			{children}
+		</CustomBtnGlobal>
+	)
 }
 export default Button

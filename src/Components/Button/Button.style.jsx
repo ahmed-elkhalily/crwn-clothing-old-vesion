@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const CustomBtn = styled.button`
+export const CustomBtnGlobal = styled.button`
     min-width: 165px;
     width: auto;
     height: 50px;
@@ -44,21 +44,3 @@ export const CustomBtn = styled.button`
         }
 
 `
-
-/**
- *
- * .custom-button {
-    &.inverted {
-        background-color: white;
-        color: black;
-        border: 1px solid black;
-
-        &:hover {
-            background-color: black;
-            color: white;
-            border: none;
-        }
-    }
-}
-
- */

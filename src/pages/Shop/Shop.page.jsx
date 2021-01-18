@@ -11,67 +11,66 @@ const CollectionOverviewWithSpinner = SpinnerComponent(CollectionOverview)
 const CollectionPageWithSpinner = SpinnerComponent(collectionPage)
 
 class Shop extends Component {
-    constructor(props) {
-        super(props)
+	constructor(props) {
+		super(props)
 
-        this.state = {
-            isLoadingData: true,
-        }
-    }
+		this.state = {
+			isLoadingData: true,
+		}
+	}
 
-    componentDidMount() {
-        firestore.collection("collections").onSnapshot(
-            (snapShot) => {
-                let shopCollections = {}
+	componentDidMount() {
+		firestore.collection("collections").onSnapshot(
+			(snapShot) => {
+				let shopCollections = {}
 
-                snapShot.docs.map((doc) => {
-                    shopCollections[doc.data().title.toLowerCase()] = doc.data()
-                    return null
-                })
+				snapShot.docs.map((doc) => {
+					shopCollections[doc.data().title.toLowerCase()] = doc.data()
+					return null
+				})
 
-                this.props.addShopCollectionsToRed(shopCollections)
-                this.setState({ isLoadingData: false })
-            },
-            (err) => console.log("error: ", err)
-        )
-    }
+				this.props.addShopCollectionsToRed(shopCollections)
+				this.setState({ isLoadingData: false })
+			},
+			(err) => console.log("error: ", err)
+		)
+	}
 
-    render() {
-        const { match } = this.props
-        console.log(match.params.collectionId)
-        return (
-            <div className="shop-page">
-                <div className="container">
-                    <Switch>
-                        <Route
-                            exact
-                            path={`${match.path}`}
-                            render={() =>
-                                CollectionOverviewWithSpinner(
-                                    this.state.isLoadingData,
-                                    match
-                                )
-                            }
-                        />
-                        <Route
-                            exact
-                            path={`${match.path}/:collectionId`}
-                            render={({ match }) =>
-                                CollectionPageWithSpinner(
-                                    this.state.isLoadingData,
-                                    match
-                                )
-                            }
-                        />
-                    </Switch>
-                </div>
-            </div>
-        )
-    }
+	render() {
+		const { match } = this.props
+		return (
+			<div className="shop-page">
+				<div className="container">
+					<Switch>
+						<Route
+							exact
+							path={`${match.path}`}
+							render={() =>
+								CollectionOverviewWithSpinner(
+									this.state.isLoadingData,
+									match
+								)
+							}
+						/>
+						<Route
+							exact
+							path={`${match.path}/:collectionId`}
+							render={({ match }) =>
+								CollectionPageWithSpinner(
+									this.state.isLoadingData,
+									match
+								)
+							}
+						/>
+					</Switch>
+				</div>
+			</div>
+		)
+	}
 }
 const mapDispatchToProps = (dispatch) => ({
-    addShopCollectionsToRed: (shopCollections) =>
-        dispatch(shopCollectionsAction(shopCollections)),
+	addShopCollectionsToRed: (shopCollections) =>
+		dispatch(shopCollectionsAction(shopCollections)),
 })
 
 export default connect(null, mapDispatchToProps)(Shop)

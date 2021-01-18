@@ -4,25 +4,25 @@ import { shopCollections } from "../../redux/shop/shop.select.js"
 import { Component } from "react"
 
 class CollectionOverview extends Component {
-    render() {
-        const { shopCollections } = this.props
-        return (
-            <>
-                {shopCollections.map((collection) => {
-                    return (
-                        <CollectionPreview
-                            key={collection.id}
-                            collection={collection}
-                        />
-                    )
-                })}
-            </>
-        )
-    }
+	render() {
+		const { shopCollections } = this.props
+		return (
+			<>
+				{shopCollections.map((collection) => {
+					return (
+						<CollectionPreview
+							key={collection.id}
+							collection={collection}
+						/>
+					)
+				})}
+			</>
+		)
+	}
 }
 
 const mapStateToProps = (state) => ({
-    shopCollections: shopCollections(state),
+	shopCollections: shopCollections(state),
 })
 
 export default connect(mapStateToProps)(CollectionOverview)
