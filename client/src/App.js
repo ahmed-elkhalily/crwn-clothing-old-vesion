@@ -9,9 +9,12 @@ import { changeCartHidden } from "./redux/cart/cart.selector"
 import { connect } from "react-redux"
 import CheckoutPage from "./pages/checkout/Checkout.page"
 import { currentUserStart } from "./redux/user/user.actions"
+import { fetchCollectionStart } from "./redux/shop/shop.action"
+
 class App extends Component {
 	componentDidMount() {
 		this.props.setCurrentUser()
+		this.props.fetchCollectionStart()
 	}
 
 	render() {
@@ -24,9 +27,7 @@ class App extends Component {
 					<Route
 						exact
 						path="/signin"
-						render={() =>
-							this.props.user ? <Redirect to="/" /> : <Signin />
-						}
+						render={() => (this.props.user ? <Redirect to="/" /> : <Signin />)}
 					/>
 					<Route path="/checkout" component={CheckoutPage} />
 				</Switch>
@@ -44,5 +45,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
 	setCurrentUser: () => dispatch(currentUserStart()),
+	fetchCollectionStart: () => dispatch(fetchCollectionStart()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App)

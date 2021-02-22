@@ -4,6 +4,8 @@ import { firestore, snapShotMapToReduce } from "../../firebase/firebase.utils"
 import {
 	fetchCollectionSuccess,
 	fetchCollectionFailure,
+	fetchCollectionItemsSuccess,
+	fetchCollectionItemsFailure,
 } from "../shop/shop.action"
 
 function* fetchShopDataAsync() {

@@ -19,3 +19,17 @@ export const fetchCollectionFailure = (errorMessage) => ({
 	type: shoptypes.SHOP_COLLECTIONS_FAILURE,
 	payload: errorMessage,
 })
+export const fetchCollectionItemsStart = (collectionTitle) => ({
+	type: shoptypes.SHOP_COLLECTION_ITEMS_START,
+	payload: collectionTitle,
+})
+
+export const fetchCollectionItemsSuccess = (collection) => ({
+	type: shoptypes.SHOP_COLLECTION_ITEMS_SUCCESS,
+	payload: collection,
+})
+
+export const fetchCollectionItemsFailure = (errorMessage) => ({
+	type: shoptypes.SHOP_COLLECTION_ITEMS_FAILURE,
+	payload: errorMessage,
+})

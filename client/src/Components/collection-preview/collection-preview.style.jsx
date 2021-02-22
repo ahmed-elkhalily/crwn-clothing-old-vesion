@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const CollectionPreviewStyled = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 200px;
+	margin-bottom: 50px;
 `
 
 export const Title = styled.div`
