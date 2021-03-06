@@ -3,7 +3,7 @@ import CollectionItem from "../../Components/collection-items/Collection-item.co
 import "./collection.styles.jsx"
 // redux
 import { collectionData } from "../../redux/shop/shop.select.js"
-
+// styles
 import { CollectionPageStyle, Items, Title } from "./collection.styles.jsx"
 
 const CollectionPage = ({ collectionData: { title, items } }) => {
