@@ -6,9 +6,9 @@
 ## For New Repo:
 [crown-clothing-new-repo](https://github.com/ahmed-elkhalily/crown-clothing-new)
 
-## tools using and technologies:
+## Tools using and technologies:
 
-### State Managment:
+#### State Managment:
 1. React-Router-Dom
 2. Redux
 3. React-Redux
@@ -17,12 +17,12 @@
 7. Redux-persist
 8. Reselect 
 
-### Styling:
+#### Styling:
 1. Styled-Components
 2. SASS
 
-### Backend:
+#### Backend:
 1. Firebase
 
-### Payment:
+#### Payment:
 1. React-stripe-checkout
