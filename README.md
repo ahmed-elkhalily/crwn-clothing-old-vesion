@@ -4,4 +4,4 @@
 [CrownClothing](https://crown-clothing-new.vercel.app/)
 
 ## For New Repo:
-[crown-clothing-new](https://github.com/ahmed-elkhalily/crown-clothing-new)
+[crown-clothing-new-repo](https://github.com/ahmed-elkhalily/crown-clothing-new)
